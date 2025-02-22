@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    build: .
+    build: ./server
     container_name: chat-backend
     restart: always
     ports:
@@ -14,11 +14,13 @@ services:
       - mongo
 
   frontend:
-    build: .
+    build: ./public
     container_name: chat-frontend
     restart: always
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_LOCALHOST_KEY="chat-app-current-user"
     depends_on:
       - backend
 
