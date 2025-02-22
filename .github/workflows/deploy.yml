@@ -9,16 +9,16 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
-    
+      uses: actions/checkout@v4
+
     - name: SSH into EC2 and deploy
-      uses: appleboy/ssh-action@v0.1.4
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << EOF
           cd ~/DevOps_01_ChatApp_CI_CD
           git pull origin main
           docker compose down
           docker compose up -d --build
+        EOF      
