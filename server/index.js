@@ -34,7 +34,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "https://chatapp.hoangguruu.id.vn",
+    origin: "http://54.169.235.220",
     credentials: true,
   },
 });
