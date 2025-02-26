@@ -1,4 +1,4 @@
-export const host = "http://54.169.235.220";
+export const host = "https://api.hoangguruu.id.vn";
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
